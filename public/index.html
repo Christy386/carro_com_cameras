@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Movimentando Carro</title>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@300&display=swap" rel="stylesheet">
+    <title>TCC 3.0</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app-3">
+        <container id="buttons" v-if="container"> 
+            <div id="1"><button v-if="front" V-on:click="B_front">F</button></div>
+
+            <div id="2"><button v-if="front_right" V-on:click="B_front_right">FR</button>
+            <button v-if="front_left" V-on:click="B_front_left">FL</button></div>
+
+            <div id="3"><button v-if="right" V-on:click="B_right">R</button>
+            <button v-if="stop" V-on:click="B_stop">S</button>
+            <button v-if="left" V-on:click="B_left">L</button></div>
+            
+            <div id="4"><button v-if="back_right" V-on:click="B_back_right">BR</button>
+            <button v-if="back_left" V-on:click="B_back_left">BL</button></div>
+            
+            <div id="5"><button v-if="back" V-on:click="B_back">B</button></div>
+             
+            <div ><button v-if="update_b" V-on:click="B_update">update</button></div>
+            
+            <div>
+                <img v-bind:src= "img_src1" style="width:60vw; height:40vw">
+                <img v-bind:src= "img_src2" style="width:60vw; height:40vw">
+            </div>
+
+            <div>
+                <input 
+                v-on:keyup.up="front_up" v-on:keydown.up="front_down" 
+                v-on:keyup.down="back_up" v-on:keydown.down="back_down" 
+                v-on:keyup.right="right_up" v-on:keydown.right="right_down"
+                v-on:keyup.left="left_up" v-on:keydown.left="left_down" 
+                > 
+            </div>
+
+        </container>
+    </div>
+
+    <script>
+        const img = document.querySelector('img');
+        const WS_URL1 = 'ws:///192.168.1.5:8888';
+        const ws1 = new WebSocket(WS_URL1);
+        const WS_URL2 = 'ws:///192.168.1.5:8889';
+        const ws2 = new WebSocket(WS_URL2);
+        let urlObject;
+        ws1.onopen = () => console.log(`Connected to ${WS_URL1}`);
+        ws2.onopen = () => console.log(`Connected to ${WS_URL2}`);
+        
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./main.js"></script>
+    <script src="./Vue.js"></script>
+</body>
+</html>
